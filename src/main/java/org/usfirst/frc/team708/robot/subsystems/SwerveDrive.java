@@ -99,14 +99,47 @@ public void calculateMeasurements(double omega, double translationX, double tran
     double currentAngle = (currentPosition * 360.0 / Constants.STEER_ENCODER_COUNTS_PER_REV) % 360.0;
     double deltaDegrees = requestedAngle - currentAngle;
 
+    double currentPosition = steer.getSelectedSensorPosition(0); //getting the current encoder count
+    double currentAngle = (currentPosition * 360.0 / Constants.STEER_ENCODER_COUNTS_PER_REV) % 360.0;
+
     if(currentAngle > 180){
-      currentAngle -= 180;
+      currentAngle -= 360; //if greater than 180, becomes opposite but less than 180 (-179 < x <179)
     }
-      if((180 - currentAngle) < 180){
-        steer.set(ControlMode.Position, currentPosition + deltaDegrees);
-      }else{
-        steer.set(ControlMode.Position, currentPosition + deltaDegrees); //if wrong direction, flip sign
+
+    double deltaDegrees = -requestedAngle - currentAngle;
+
+    //makes sure that deltaDegrees fits the -180 to 180 domain
+    if(Math.abs(deltaDegrees) >= 180){
+      deltaDegrees -= 360 * Math.signum(deltaDegrees);//signum simplifies commented code below
+      /*
+      double absDeltaDegrees = Math.abs(deltaDegrees) - 360; //take 360 off of deltaDegrees to set it to a negative angle
+      if(Math.abs(currentAngle) < Math.abs(requestedAngle)){
+        absDeltaDegrees *= -1;
       }
+      steer.set(ControlMode.Position, deltaDegrees);
+      */
+    }
+
+    /*
+    checks if it is efficient to move complementary to requested angle 
+    (ex. requested angle = 45, new angle = -45; |45| + |-45| = 90)
+    and once this value is calculated, moves wheel and reverses speed.
+    NOTE this uses the new deltaDegrees from the if statement above, not from the top
+    */
+    if(Math.abs(deltaDegrees) > 90){
+      //do above except base off of 90 degrees
+      deltaDegrees -= 180 * Math.signum(deltaDegrees);
+      requestedSpeed *= -1;
+    }
+
+    //got logic for targetPosition from 103's code. Make sure STEER_ENCODER_COUNTS_PER_REV is right constant
+    double targetPosition = currentPosition + deltaDegrees * Constants.STEER_ENCODER_COUNTS_PER_REV / 360.0;
+
+    //actually sets the position of the wheel
+    steer.set(ControlMode.Position, targetPosition);
+    drive.set(requestedSpeed); //check if speed is or is not a decimal/what it is supposed to be, decimal or not
+
+
 
   }
 
