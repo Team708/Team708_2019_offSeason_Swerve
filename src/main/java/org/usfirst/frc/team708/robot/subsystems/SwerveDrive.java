@@ -97,7 +97,7 @@ public void calculateMeasurements(double omega, double translationX, double tran
 
     double currentPosition = steer.getSelectedSensorPosition(0); //getting the current encoder count
     double currentAngle = (currentPosition * 360.0 / Constants.STEER_ENCODER_COUNTS_PER_REV) % 360.0;
-    double deltaDegrees = requestedAngle - currentAngle;
+    // double deltaDegrees = requestedAngle - currentAngle;
 
     double currentPosition = steer.getSelectedSensorPosition(0); //getting the current encoder count
     double currentAngle = (currentPosition * 360.0 / Constants.STEER_ENCODER_COUNTS_PER_REV) % 360.0;
