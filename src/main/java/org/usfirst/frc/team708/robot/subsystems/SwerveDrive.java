@@ -97,10 +97,8 @@ public void calculateMeasurements(double omega, double translationX, double tran
 
     double currentPosition = steer.getSelectedSensorPosition(0); //getting the current encoder count
     double currentAngle = (currentPosition * 360.0 / Constants.STEER_ENCODER_COUNTS_PER_REV) % 360.0;
-    // double deltaDegrees = requestedAngle - currentAngle;
 
-    double currentPosition = steer.getSelectedSensorPosition(0); //getting the current encoder count
-    double currentAngle = (currentPosition * 360.0 / Constants.STEER_ENCODER_COUNTS_PER_REV) % 360.0;
+    //possibly move deltaDegrees here depending on logic
 
     if(currentAngle > 180){
       currentAngle -= 360; //if greater than 180, becomes opposite but less than 180 (-179 < x <179)
@@ -112,11 +110,10 @@ public void calculateMeasurements(double omega, double translationX, double tran
     if(Math.abs(deltaDegrees) >= 180){
       deltaDegrees -= 360 * Math.signum(deltaDegrees);//signum simplifies commented code below
       /*
-      double absDeltaDegrees = Math.abs(deltaDegrees) - 360; //take 360 off of deltaDegrees to set it to a negative angle
+      double absDeltaDegrees = Math.abs(deltaDegrees) - 360; //take 360 off of deltaDegrees to set to a negative
       if(Math.abs(currentAngle) < Math.abs(requestedAngle)){
         absDeltaDegrees *= -1;
       }
-      steer.set(ControlMode.Position, deltaDegrees);
       */
     }
 
