@@ -34,6 +34,8 @@ public final class Constants {
 	public static final double	PITCH_MAX								= 3.0;
 	public static final double	ROLL_MAX								= 6.0;
 
+	public static final double STEER_ENCODER_COUNTS_PER_REV             = 0.0; //set value when known
+
 	public static final double  WHEEL_BASE_LENGTH                       = 0.0; //set value when known
 	public static final double  WHEEL_BASE_WIDTH                        = 0.0; //set value when known
 
