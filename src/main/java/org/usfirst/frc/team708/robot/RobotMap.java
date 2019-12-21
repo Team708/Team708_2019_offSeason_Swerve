@@ -33,8 +33,16 @@ public class RobotMap {
 	public static final int DtDriveFrontLeftMotor  		        = 11; 
 	public static final int DtDriveFrontRightMotor  		    = 12; 
 	
-	public static final int DtDriveBackLeftMotor  	            = 14;
-	public static final int DtDriveBackRightMotor	 	        = 15;
+	public static final int DtDriveBackLeftMotor  	            = 13;
+	public static final int DtDriveBackRightMotor  	            = 14;
+
+	public static final int DtSteerFrontLeftMotor	 	        = 15;
+	public static final int DtSteerFrontRightMotor	 	        = 16;
+
+	public static final int DtSteerBackLeftMotor	 	        = 17;
+	public static final int DtSteerBackRightMotor	 	        = 18;
+
+
 
 // Elevator 
 // 	public static final int elevatorMotorMaster	 			= 21;

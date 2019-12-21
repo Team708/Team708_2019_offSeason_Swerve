@@ -27,10 +27,11 @@ public class Robot extends TimedRobot {
     Timer statsTimer; // Timer used for Smart Dash statistics
 
     // public static Climber           climber;
-    public static Drivetrain        drivetrain;
+    //public static Drivetrain        drivetrain;
     // public static Elevator          elevator;
     // public static Intake            intake;
     // public static VisionProcessor   visionProcessor;
+    public static SwerveDrive   swerveDrive;
 
     public static OI oi;
 
@@ -59,16 +60,18 @@ public class Robot extends TimedRobot {
         // Subsystem Initialization
 
         // climber         = new Climber();
-        drivetrain      = new Drivetrain();
+        //drivetrain      = new Drivetrain();
         // intake          = new Intake();
         // visionProcessor = new VisionProcessor();
         // elevator        = new Elevator();
+        swerveDrive      = new SwerveDrive();
+
 
         // visionProcessor.setNTInfo("ledMode", Constants.VISION_LED_OFF);
         // Robot.intake.intakeRetract();    // initialize intake in starting config
         // Robot.intake.hatchRetract();
         // Robot.intake.beakOpen();
-        Robot.drivetrain.shiftGearlow();
+        //Robot.drivetrain.shiftGearlow();
         sendDashboardSubsystems(); // Sends each subsystem's cmds to Smart Dashboard
 
         queueAutonomousModes(); // Adds autonomous modes to the selection box
@@ -127,8 +130,8 @@ public class Robot extends TimedRobot {
      */
     public void autonomousInit() {
         // schedule the autonomous command
-        drivetrain.shiftGearlow();
-        drivetrain.setBrakeMode(true);
+        //drivetrain.shiftGearlow();
+        //drivetrain.setBrakeMode(true);
         // drivetrain.resetGyro();
         // intake.intakeRetract();
         // intake.beakOpen();
@@ -160,8 +163,8 @@ public class Robot extends TimedRobot {
         // intake.beakOpen();
         // intake.hatchRetract();
         // intake.intakeRetract();
-        drivetrain.setBrakeMode(false);
-        drivetrain.shiftGearlow();
+        //drivetrain.setBrakeMode(false);
+        //drivetrain.shiftGearlow();
     }
 
     /**
@@ -193,7 +196,7 @@ public class Robot extends TimedRobot {
     private void sendStatistics() {
         // if (statsTimer.get() >= Constants.SEND_STATS_INTERVAL) statsTimer.reset();
         // climber.sendToDashboard();
-        drivetrain.sendToDashboard();
+        //drivetrain.sendToDashboard();
         // elevator.sendToDashboard();
         // intake.sendToDashboard();
         // visionProcessor.sendToDashboard();
@@ -224,7 +227,7 @@ public class Robot extends TimedRobot {
      */
     private void sendDashboardSubsystems() {
         // SmartDashboard.putData(climber);
-        SmartDashboard.putData(drivetrain);
+        //SmartDashboard.putData(drivetrain);
         // SmartDashboard.putData(elevator);
         // SmartDashboard.putData(intake);
         // SmartDashboard.putData(visionProcessor);
