@@ -19,6 +19,7 @@ import edu.wpi.cscore.UsbCamera;
 // import org.usfirst.frc.team708.robot.commands.autonomous.*;
 import org.usfirst.frc.team708.robot.subsystems.*;
 import org.usfirst.frc.team708.robot.Constants;
+import org.usfirst.frc.team708.robot.commands.SwerveDrive;
 
 
 
@@ -27,11 +28,11 @@ public class Robot extends TimedRobot {
     Timer statsTimer; // Timer used for Smart Dash statistics
 
     // public static Climber           climber;
-    //public static Drivetrain        drivetrain;
+    public static Drivetrain        drivetrain;
     // public static Elevator          elevator;
     // public static Intake            intake;
     // public static VisionProcessor   visionProcessor;
-    public static SwerveDrive   swerveDrive;
+    // public static SwerveDrive   swerveDrive;
 
     public static OI oi;
 
@@ -64,7 +65,7 @@ public class Robot extends TimedRobot {
         // intake          = new Intake();
         // visionProcessor = new VisionProcessor();
         // elevator        = new Elevator();
-        swerveDrive      = new SwerveDrive();
+        drivetrain      = new Drivetrain();
 
 
         // visionProcessor.setNTInfo("ledMode", Constants.VISION_LED_OFF);
