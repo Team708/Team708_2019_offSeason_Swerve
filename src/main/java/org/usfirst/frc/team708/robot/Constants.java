@@ -20,29 +20,26 @@ public final class Constants {
 	public static final double	DRIVE_MOTOR_MAX_SPEED 					= 1.0;  // 1.0
 	public static final double	ROTATE_MOTOR_MAX_SPEED 					= 1.0;  // .80
 	public static final double	TANK_STICK_TOLERANCE 					= .20;
-	public static final int  	DRIVETRAIN_WHEEL_DIAMETER 				= 4; //4inch wheel * (LOW 10.44,  HIGH 4.87)
-	public static final double  DRIVETRAIN_GEAR_RATIO_LOW				= 10.44;
-	public static final double  DRIVETRAIN_GEAR_RATIO_HIGH				= 4.87;
+	public static final double  DRIVETRAIN_WHEEL_DIAMETER 				= 4.0;  //4inch wheel * (LOW 10.44,  HIGH 4.87)
+	public static final double  DRIVETRAIN_GEAR_RATIO					= 5.0;  //(30/18)*(45/15)
 	public static final double  DRIVETRAIN_ENCODER_PULSES_PER_REV	 	= 42.0;
 	public static final boolean DRIVE_USE_SQUARED_INPUT 				= false;
 	public static final boolean DRIVETRAIN_USE_LEFT_ENCODER				= true; // variable to determine which side encoder is on
 	public static final double	DRIVE_MOTOR_OFF		 					= 0.0;
 	public static final double	GRAYHILL_ENCODER_PULSES_PER_REVOLUTION 	= 256.0;
 	public static final double	ENCODER_BOTTOM_POSITION 				= 0.0;
-	public static final int		DT_HIGH_GEAR							= 1;
-	public static final int		DT_LOW_GEAR								= 0;
-	public static final double	PITCH_MAX								= 3.0;
-	public static final double	ROLL_MAX								= 6.0;
 
 	public static final double STEER_ENCODER_COUNTS_PER_REV             = 360.0; //set value when known
 
 	public static final double  WHEEL_BASE_LENGTH                       = 17.5; //set value when known
 	public static final double  WHEEL_BASE_WIDTH                        = 17.5; //set value when known
 
+	public static final double DRIVE_MOTOR_MAX_ACCEL 					= 572.0; //RPM/S, 16 m/s^2 on 4in wheels
+
 	// PID Tuning parameters
-	public static final double Kp = 0.0;		// Proportional gain
+	public static final double Kp = 2.0;		// Proportional gain
 	public static final double Ki = 0.0;		// Integral gain
-	public static final double Kd = 0.0;		// Derivative gain
+	public static final double Kd = 20.0;		// Derivative gain
 
 	public static final double KpForward = 0.1;
 	public static final double KiForward = 0.02;

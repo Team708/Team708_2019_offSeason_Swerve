@@ -12,10 +12,8 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team708.robot.RobotMap;
-import org.usfirst.frc.team708.robot.commands.SwerveDrive;
 import org.usfirst.frc.team708.robot.commands.drivetrain.JoystickDrive;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 
 public class Drivetrain extends PIDSubsystem {
@@ -57,21 +55,27 @@ public class Drivetrain extends PIDSubsystem {
         driveFLController.setP(Constants.Kp);
         driveFLController.setI(Constants.Ki);
         driveFLController.setD(Constants.Kd);
+        driveFLController.setSmartMotionMaxAccel(Constants.DRIVE_MOTOR_MAX_ACCEL,0);
     
         //FR
         driveFRController.setP(Constants.Kp);
         driveFRController.setP(Constants.Ki);
         driveFRController.setP(Constants.Kd);
-    
+        driveFRController.setSmartMotionMaxAccel(Constants.DRIVE_MOTOR_MAX_ACCEL*Constants.DRIVETRAIN_GEAR_RATIO,0);
+
         //BL
         driveBLController.setP(Constants.Kp);
         driveBLController.setP(Constants.Kp);
         driveBLController.setP(Constants.Kp);
+        driveBLController.setSmartMotionMaxAccel(Constants.DRIVE_MOTOR_MAX_ACCEL,0);
+
     
         //BR
         driveBRController.setP(Constants.Kp);
         driveBRController.setP(Constants.Kp);
         driveBRController.setP(Constants.Kp);
+        driveBRController.setSmartMotionMaxAccel(Constants.DRIVE_MOTOR_MAX_ACCEL,0);
+
     
     
     

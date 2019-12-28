@@ -22,9 +22,9 @@ public class JoystickDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        SwerveDrive.calculateMeasurements(OI.driverGamepad.getAxis(Gamepad.rightStick_X),
-                                          OI.driverGamepad.getAxis(Gamepad.leftStick_X), 
-                                          OI.driverGamepad.getAxis(Gamepad.leftStick_Y));
+        SwerveDrive.calculateMeasurements(OI.driverGamepad.getAxis(Gamepad.leftStick_X),
+                                          OI.driverGamepad.getAxis(Gamepad.leftStick_Y), 
+                                          OI.driverGamepad.getAxis(Gamepad.rightStick_X));
     }
 
     // Make this return true when this Command no longer needs to run execute()

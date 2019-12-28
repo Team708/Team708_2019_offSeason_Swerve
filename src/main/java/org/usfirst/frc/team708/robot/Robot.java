@@ -21,8 +21,6 @@ import org.usfirst.frc.team708.robot.subsystems.*;
 import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.commands.SwerveDrive;
 
-
-
 public class Robot extends TimedRobot {
 
     Timer statsTimer; // Timer used for Smart Dash statistics
