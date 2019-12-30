@@ -13,24 +13,22 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.cscore.UsbCamera;
+import com.analog.adis16448.frc.ADIS16448_IMU;
 
 // import org.usfirst.frc.team708.robot.commands.autonomous.*;
 import org.usfirst.frc.team708.robot.subsystems.*;
 import org.usfirst.frc.team708.robot.Constants;
-import org.usfirst.frc.team708.robot.commands.SwerveDrive;
 
 public class Robot extends TimedRobot {
 
     Timer statsTimer; // Timer used for Smart Dash statistics
 
-    // public static Climber           climber;
+    public static double zeroHeading;
+    public static double zeroAngle;
+
     public static Drivetrain        drivetrain;
-    // public static Elevator          elevator;
-    // public static Intake            intake;
-    // public static VisionProcessor   visionProcessor;
-    // public static SwerveDrive   swerveDrive;
+
+    public static final ADIS16448_IMU imu = new ADIS16448_IMU();
 
     public static OI oi;
 
@@ -84,6 +82,8 @@ public class Robot extends TimedRobot {
         // cameraback.setFPS(15);
         // This MUST BE LAST or a NullPointerException will be thrown
         oi = new OI(); // Initializes the OI
+        zeroHeading = imu.getYaw();
+        zeroAngle = imu.getAngle();
     }
 
     /**

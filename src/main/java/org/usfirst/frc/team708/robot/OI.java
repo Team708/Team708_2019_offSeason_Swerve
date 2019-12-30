@@ -31,7 +31,7 @@ public class OI {
  */
 
 // Driver Buttons
-// 	private static final int FIND_FEEDER_BUTTON	 		    = Gamepad.button_R_Shoulder;
+ 	private static final int FIELD_ORIENTED_DRIVE_BUTTON    = Gamepad.button_R_Shoulder;
 // 	private static final int SHIFT_DRIVETRAIN_HIGH_BUTTON	= Gamepad.button_L_Shoulder;
 //	private static final int HOLDGEARHIGH					= Gamepad.shoulderAxisLeft;;
 //	private static final int 								= Gamepad.shoulderAxisRight;;
@@ -88,7 +88,7 @@ public class OI {
 /*
  * Driver Button events
  */
-	// public static final Button findFeeder		= new JoystickButton(driverGamepad, FIND_FEEDER_BUTTON);
+	 public static final Button fieldOrientLock		= new JoystickButton(driverGamepad, FIELD_ORIENTED_DRIVE_BUTTON);
 	// public static final Button highGear		 	= new JoystickButton(driverGamepad, SHIFT_DRIVETRAIN_HIGH_BUTTON);
 	// public static final Button findBall			= new JoystickButton(driverGamepad, FIND_BALL_BUTTON);
 	// public static final Button rollerForward	= new JoystickButton(driverGamepad, ROLLER_FORWARDS);
