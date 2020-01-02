@@ -21,13 +21,13 @@ public final class Constants {
 	public static final double  SWERVE_ROTATION_MAX_SPEED				= 1250.0*8.0; //The 0.8 is to request a speed that is always achievable
 
 	//Swerve Module Steer Offsets (Rotation encoder values when the wheels are facing 0 degrees)
-	public static final int STEER_FL_ENCODER_START_POS 					= 1740 - 1024; 	//TODO set correct values
-	public static final int STEER_FR_ENCODER_START_POS 					= -2895 - 1024; //TODO set correct values
-	public static final int STEER_BL_ENCODER_START_POS 					= -2639 - 1024; //TODO set correct values
-	public static final int STEER_BR_ENCODER_START_POS 					= 975 - 1024; 	//TODO set correct values
+	public static final int STEER_FR_ENCODER_START_POS 					= 835; 	//TODO set correct values
+	public static final int STEER_FL_ENCODER_START_POS 					= 2503; //TODO set correct values
+	public static final int STEER_BL_ENCODER_START_POS 					= 1371; //TODO set correct values
+	public static final int STEER_BR_ENCODER_START_POS 					= 1577; //TODO set correct values
 
-	public static final double	DRIVE_MOTOR_MAX_SPEED 					= 0.5;  // 1.0
-	public static final double	ROTATE_MOTOR_MAX_SPEED 					= 1.0;  // .80
+	public static final double	DRIVE_MOTOR_MAX_POWER 					= 1.0;  // 1.0
+	public static final double	ROTATE_MOTOR_MAX_POWER 					= 0.5;  // .80
 	public static final double	TANK_STICK_TOLERANCE 					= .20;
 	public static final double  DRIVETRAIN_WHEEL_DIAMETER 				= 4.0;  //4 inch wheel
 	public static final double  DRIVETRAIN_GEAR_RATIO					= 5.0;  //(30/18)*(45/15)
@@ -46,9 +46,9 @@ public final class Constants {
 	public static final double driveF = 0;		// Feed forward gain
 	public static final double driveRampRate = 0.0;	// Ramp rate
 
-	public static final double steerKp = 6.0;		// Proportional gain
+	public static final double steerKp = 3.5;		// Proportional gain
 	public static final double steerKi = 0.0;		// Integral gain
-	public static final double steerKd = 160.0;		// Derivative gain
+	public static final double steerKd = 180.0;		// Derivative gain
 
 	public static final int ALLIANCE_RED 	 		= 1;
 	public static final int ALLIANCE_BLUE 	 		= -1;

@@ -11,7 +11,7 @@ public class AxisDown extends Trigger {
 	 
 	private Gamepad gamepad;
 	private int axis;
-		
+	
 	public AxisDown(Gamepad targetGamepad, int targetAxis) {
 		gamepad = targetGamepad;
 		axis = targetAxis;

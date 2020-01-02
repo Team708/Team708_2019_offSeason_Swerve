@@ -11,15 +11,13 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team708.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team708.robot.OI;
-import org.usfirst.frc.team708.robot.util.Gamepad;
 
 public class FieldCentricSwerveDrive extends Command {
 	
-	public static final double OMEGA_SCALE = 1.0 / 30.0;
+	public static final double ROTATION_SCALE = 1.0 / 30.0;
 	public static final double DEADZONE = 0.05;
 
-	private double originHeading = 0.0;
-	private double originCorr = 0;
+	private double originHeading;
   	private double leftPow = 1.0;
 	private double rightPow = 1.0;
 	
@@ -34,47 +32,48 @@ public class FieldCentricSwerveDrive extends Command {
 
     @Override
 	protected void execute() {
-		if (OI.driverGamepad.getRawButtonPressed(7)){
-			originHeading = Robot.imu.getYaw();
+		if (OI.fieldOrientReset.get()){
+			originHeading = Robot.imu.getAngle();
 		}
 
-		double originOffset = 360 - originHeading;
-		originCorr = Robot.imu.getYaw() + originOffset;
-
-		double strafe = Math.pow(Math.abs(OI.driverGamepad.getAxis(Gamepad.leftStick_X)), leftPow) * Math.signum(OI.driverGamepad.getAxis(Gamepad.leftStick_X));
-		double forward = Math.pow(Math.abs(OI.driverGamepad.getAxis(Gamepad.leftStick_Y)), leftPow) * -Math.signum(OI.driverGamepad.getAxis(Gamepad.leftStick_Y));
-        double omega = Math.pow(Math.abs(OI.driverGamepad.getAxis(Gamepad.rightStick_X)), rightPow) * Math.signum(OI.driverGamepad.getAxis(Gamepad.rightStick_X)) * OMEGA_SCALE;
+		double translationX = Math.pow(Math.abs(OI.driverGamepad.getAxis(OI.TRANSLATION_X)), leftPow) * Math.signum(OI.driverGamepad.getAxis(OI.TRANSLATION_X));
+		double translationY = Math.pow(Math.abs(OI.driverGamepad.getAxis(OI.TRANSLATION_Y)), leftPow) * -Math.signum(OI.driverGamepad.getAxis(OI.TRANSLATION_Y));
+		double rotation = Math.pow(Math.abs(OI.driverGamepad.getAxis(OI.ROTATION)), rightPow) * Math.signum(OI.driverGamepad.getAxis(OI.ROTATION)) * ROTATION_SCALE;
+		
+		// double translationX = Math.pow(Math.abs(OI.driverGamepad.getAxis(Gamepad.leftStick_X)), leftPow) * Math.signum(OI.driverGamepad.getAxis(Gamepad.leftStick_X));
+		// double translationY = Math.pow(Math.abs(OI.driverGamepad.getAxis(Gamepad.leftStick_Y)), leftPow) * -Math.signum(OI.driverGamepad.getAxis(Gamepad.leftStick_Y));
+        // double omega = Math.pow(Math.abs(OI.driverGamepad.getAxis(Gamepad.rightStick_X)), rightPow) * Math.signum(OI.driverGamepad.getAxis(Gamepad.rightStick_X)) * OMEGA_SCALE;
        		
         // Add a small deadzone on the joysticks
-        if (Math.abs(strafe) < Math.pow(DEADZONE, leftPow)) strafe = 0.0;
-		if (Math.abs(forward) < Math.pow(DEADZONE, leftPow)) forward = 0.0;
-		if (Math.abs(omega) < Math.pow(DEADZONE, rightPow) * OMEGA_SCALE) omega = 0.0;
+        if (Math.abs(translationX) < Math.pow(DEADZONE, leftPow)) translationX = 0.0;
+		if (Math.abs(translationY) < Math.pow(DEADZONE, leftPow)) translationY = 0.0;
+		if (Math.abs(rotation) < Math.pow(DEADZONE, rightPow) * ROTATION_SCALE) rotation = 0.0;
 		
 		
 		// If all of the joysticks are in the deadzone, don't update the motors
 		// This makes side-to-side strafing much smoother
-		if (strafe == 0.0 && forward == 0.0 && omega == 0.0) {
-			Robot.drivetrain.setDriveLeftFront(0.0);
-			Robot.drivetrain.setDriveLeftRear(0.0);
-			Robot.drivetrain.setDriveRightFront(0.0);
-			Robot.drivetrain.setDriveRightRear(0.0);
+		if (translationX == 0.0 && translationY == 0.0 && rotation == 0.0) {
+			Robot.drivetrain.setDriveFL(0.0);
+			Robot.drivetrain.setDriveBL(0.0);
+			Robot.drivetrain.setDriveFR(0.0);
+			Robot.drivetrain.setDriveBR(0.0);
 			return;
    		}	
 
-		if (!OI.driverGamepad.getTrigger()) {
+		if (OI.fieldOrientLock.get()) { // TODO: add back in not (!). Removed for testing.
         	// When the Left Joystick trigger is not pressed, The robot is in Field Centric Mode.
-        	// The calculations correct the forward and strafe values for field centric attitude. 
+        	// The calculations correct the translationY and translationX values for field centric attitude. 
     		
     		// Rotate the velocity vector from the joystick by the difference between our
     		// current orientation and the current origin heading
-    		double originCorrection = Math.toRadians(originHeading - Robot.imu.getYaw());
-    		double temp = forward * Math.cos(originCorrection) - strafe * Math.sin(originCorrection);
-    		strafe = strafe * Math.cos(originCorrection) + forward * Math.sin(originCorrection);
-    		forward = temp;
+    		double originCorrection = Math.toRadians(originHeading - Robot.imu.getAngle());
+    		double temp = translationY * Math.cos(originCorrection) - translationX * Math.sin(originCorrection);
+    		translationX = translationX * Math.cos(originCorrection) + translationY * Math.sin(originCorrection);
+    		translationY = temp;
 		}
 		
 		
-        Drivetrain.calculateMeasurements(strafe, forward, omega);
+        Drivetrain.set(translationX, translationY, rotation);
     }
 
     @Override
